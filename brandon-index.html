@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Brandon Cook</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- TODO: add Brandon's own favicon once available — favicon.png (Sam's logo) is intentionally not linked here for now -->
+    <!-- <link rel="icon" type="image/png" href="favicon.png"> -->
 
     <!-- Squarespace CSS Files -->
     <link rel="stylesheet" type="text/css" href="site.css">
@@ -1501,8 +1502,7 @@
     <!-- Splash / cover screen - shown on every load, dismissed by clicking "Enter" -->
     <div id="splash-screen">
         <div class="splash-bg">
-            <!-- TODO: replace with Brandon's real splash/cover photo -->
-            <img src="placeholder.png" alt="Brandon Cook" class="splash-bg-photo">
+            <img src="brandon-splash-screen.jpeg" alt="Brandon Cook" class="splash-bg-photo">
             <div class="splash-scrim"></div>
         </div>
         <div class="splash-content">
@@ -1565,8 +1565,7 @@
                     <div class="header-display-mobile" style="display: none;">
                         <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-top: 12px;">
                             <div class="header-title-text">
-                            <a id="site-title-mobile" href="#" onclick="showPage('home'); return false;" style="display: inline-flex; align-items: center; text-decoration: none; color: inherit; font-weight: normal;">
-                                <img src="favicon.png" alt="BC Logo" style="height: 76px; width: auto; margin-right: -8px; margin-left: -4px;">
+                            <a id="site-title-mobile" href="#" onclick="showSplash(); return false;" style="display: inline-flex; align-items: center; text-decoration: none; color: inherit; font-weight: normal;">
                                 Brandon Cook
                             </a>
                             </div>
@@ -1581,8 +1580,7 @@
                             <!-- Title -->
                             <div class="header-title" data-animation-role="header-element">
                                 <div class="header-title-text">
-                            <a id="site-title" href="#" onclick="showPage('home'); return false;" data-animation-role="header-element" style="display: inline-flex; align-items: center;">
-                                <img src="favicon.png" alt="BC Logo" style="height: 76px; width: auto; margin-right:-8px;">
+                            <a id="site-title" href="#" onclick="showSplash(); return false;" data-animation-role="header-element" style="display: inline-flex; align-items: center;">
                                 Brandon Cook
                             </a>
                                 </div>
@@ -1684,8 +1682,7 @@
                             <div class="content" style="display: flex; justify-content: center; background-color: #08263b;">
                                 <div class="hero-grid">
                                     <div class="hero-image-wrapper">
-                                        <!-- TODO: replace with Brandon's real hero/cover photo -->
-                                        <img src="placeholder.png" alt="Brandon Cook" class="cover-photo">
+                                        <img src="brandon-home.jpeg" alt="Brandon Cook" class="cover-photo">
                                     </div>
                                     <div class="hero-copy reveal-stagger">
                                         <h1 class="hero-title">Brandon Cook</h1>
@@ -1715,8 +1712,7 @@
                                 <div class="about-container">
                                 <div class="about-content reveal-stagger">
                                     <div class="about-image-wrapper">
-                                        <!-- TODO: replace with Brandon's real about-page photo -->
-                                        <img src="placeholder.png" alt="Brandon Cook" class="about-image">
+                                        <img src="brandon-about.jpg" alt="Brandon Cook" class="about-image">
                                     </div>
                                     <div class="about-text" style="font-size: 20.3px;">
                                         <h2 style="font-size: 3.5rem; margin-top: 0; margin-bottom: 1.2rem; color: #841b1a;">About Me</h2>
@@ -1771,16 +1767,16 @@
                             <div class="content">
                                 <div class="hr-grid reveal-stagger">
                                     <div class="headshot-item headshot-photo">
-                                        <!-- TODO: replace with Brandon's real headshot photo -->
-                                        <img src="placeholder.png" alt="Brandon Cook Headshot" style="margin-bottom: 20px;">
-                                        <!-- TODO: link to Brandon's actual headshot file once provided -->
-                                        <a href="#" class="download-btn">Download Headshot</a>
+                                        <img src="Headshot Brandon Cook.jpeg" alt="Brandon Cook Headshot" style="margin-bottom: 20px;">
+                                        <a href="Headshot Brandon Cook.jpeg" download class="download-btn">Download Headshot</a>
                                     </div>
                                     <div class="headshot-item headshot-photo">
-                                        <!-- TODO: replace with an image of Brandon's real résumé -->
-                                        <img src="placeholder.png" alt="Brandon Cook Resume" style="margin-bottom: 20px;">
-                                        <!-- TODO: replace with Brandon's actual résumé PDF filename once provided -->
-                                        <a href="#" class="download-btn">Download Résumé</a>
+                                        <img src="Resume Brandon Cook.jpg" alt="Brandon Cook Resume" style="margin-bottom: 20px;">
+                                        <a href="Resume Brandon Cook.pdf" download class="download-btn">Download Résumé</a>
+                                    </div>
+                                    <div class="headshot-item single headshot-photo">
+                                        <!-- TODO: replace with Brandon's second headshot once available -->
+                                        <img src="placeholder.png" alt="Second Headshot Coming Soon" style="margin-bottom: 20px;">
                                     </div>
                                 </div>
                             </div>
@@ -1859,27 +1855,6 @@
                                     </div>
                                 </div>
 
-                                <div style="height: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 60px;" class="reveal"></div>
-
-                                <!-- Reels Section -->
-                                <h2 class="media-section-title reveal">Reels</h2>
-                                <div class="media-three-videos reveal-stagger" style="grid-template-columns: repeat(2, 1fr); max-width: 500px; margin: 0 auto 40px;">
-                                    <!-- Film Reel -->
-                                    <div class="reel-item">
-                                        <div class="video-wrapper">
-                                            <img src="placeholder.png" alt="Video Coming Soon" class="video-placeholder" style="margin-top: -15px;">
-                                        </div>
-                                        <h4 class="reel-title">Film Reel</h4>
-                                    </div>
-                                    <!-- Acting Reel -->
-                                    <div class="reel-item">
-                                        <div class="video-wrapper">
-                                            <img src="placeholder.png" alt="Video Coming Soon" class="video-placeholder" style="margin-top: -15px;">
-                                        </div>
-                                        <h4 class="reel-title">Acting Reel</h4>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </section>
@@ -1892,18 +1867,32 @@
                     <section data-test="page-section" class="page-section" style="padding: 0; padding-top: 120px; display: flex; flex-direction: column;">
 
                                 <!-- Commercial Section -->
-                                <!-- No real commercial photos available yet — placeholder tiles below -->
                                 <div class="gallery-section gallery-section--commercial reveal">
                                     <span class="gallery-section-title">Commercial</span>
                                     <div class="gallery-grid">
                                         <div class="commercial-item">
-                                            <img src="placeholder.png" alt="Photo Coming Soon">
+                                            <img src="brandon-commercial-01.jpeg" alt="Brandon Cook Commercial">
                                         </div>
                                         <div class="commercial-item">
-                                            <img src="placeholder.png" alt="Photo Coming Soon">
+                                            <img src="brandon-commercial-02.jpeg" alt="Brandon Cook Commercial">
                                         </div>
                                         <div class="commercial-item">
-                                            <img src="placeholder.png" alt="Photo Coming Soon">
+                                            <img src="brandon-commercial-03.jpeg" alt="Brandon Cook Commercial">
+                                        </div>
+                                        <div class="commercial-item">
+                                            <img src="brandon-commercial-04.jpeg" alt="Brandon Cook Commercial">
+                                        </div>
+                                        <div class="commercial-item">
+                                            <img src="brandon-commercial-05.jpeg" alt="Brandon Cook Commercial">
+                                        </div>
+                                        <div class="commercial-item">
+                                            <img src="brandon-commercial-06.jpeg" alt="Brandon Cook Commercial">
+                                        </div>
+                                        <div class="commercial-item">
+                                            <img src="brandon-commercial-07.jpeg" alt="Brandon Cook Commercial">
+                                        </div>
+                                        <div class="commercial-item">
+                                            <img src="brandon-commercial-08.jpeg" alt="Brandon Cook Commercial">
                                         </div>
                                     </div>
                                 </div>
@@ -1981,8 +1970,7 @@
                                             </div>
                                         </div>
                                         <div class="connect-image">
-                                            <!-- TODO: replace with Brandon's real contact-page photo -->
-                                            <img src="placeholder.png" alt="Brandon Cook">
+                                            <img src="brandon-contact.gif" alt="Brandon Cook">
                                         </div>
                                     </div>
                                 </div>
@@ -2035,21 +2023,36 @@
         document.documentElement.classList.add('splash-active');
         document.body.classList.add('splash-active');
 
-        document.addEventListener('DOMContentLoaded', function() {
+        function hideSplash() {
             const splash = document.getElementById('splash-screen');
+            if (!splash) return;
+            splash.classList.add('splash-hidden');
+            document.documentElement.classList.remove('splash-active');
+            document.body.classList.remove('splash-active');
+
+            // Matches the 0.9s opacity/transform transition set on #splash-screen
+            setTimeout(function() {
+                splash.style.display = 'none';
+            }, 900);
+        }
+
+        function showSplash() {
+            const splash = document.getElementById('splash-screen');
+            if (!splash) return;
+            splash.style.display = '';
+            void splash.offsetWidth; // force reflow so the display change is applied before the fade-in transition
+            splash.classList.remove('splash-hidden');
+            document.documentElement.classList.add('splash-active');
+            document.body.classList.add('splash-active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
             const enterLink = document.getElementById('splash-enter');
-            if (!splash || !enterLink) return;
+            if (!enterLink) return;
 
             enterLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                splash.classList.add('splash-hidden');
-                document.documentElement.classList.remove('splash-active');
-                document.body.classList.remove('splash-active');
-
-                // Matches the 0.9s opacity/transform transition set on #splash-screen
-                setTimeout(function() {
-                    splash.style.display = 'none';
-                }, 900);
+                hideSplash();
             });
         });
     </script>

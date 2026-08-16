@@ -1483,6 +1483,13 @@
             .splash-tagline {
                 letter-spacing: 0.2em;
             }
+
+            /* Brandon sits in the left third of this landscape photo — on narrow/tall
+               viewports object-fit:cover crops in on the horizontal center by default,
+               which lands on empty wall instead of him. Shift the crop left to keep him in frame. */
+            .splash-bg-photo {
+                object-position: 14% 35%;
+            }
         }
 
         @media (max-width: 520px) {

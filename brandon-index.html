@@ -417,10 +417,26 @@
             .gallery-grid .gallery-item:nth-child(6) { grid-column: span 1; grid-row: span 2; }
             .gallery-grid .gallery-item:nth-child(9) { grid-column: span 2; grid-row: span 1; }
 
+            /* Switched to flexbox (instead of grid) so the leftover last row of 2 photos
+               can be centered with justify-content — grid tracks always start left-aligned.
+               Item height comes from aspect-ratio, matched to the actual (portrait, ~2:3) photos,
+               instead of a fixed tall row height — that mismatch was the large gap-like letterboxing. */
             .gallery-section--commercial .gallery-grid {
-                grid-auto-rows: 200px;
-                gap: 2px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 4px;
                 margin-bottom: 0px;
+            }
+
+            .gallery-section--commercial .gallery-grid .commercial-item {
+                flex: 0 0 calc((100% - 8px) / 3);
+                aspect-ratio: 2 / 3;
+            }
+
+            .gallery-section--commercial .gallery-grid .commercial-item img {
+                width: 100%;
+                height: 100%;
             }
 
             .gallery-section--commercial {

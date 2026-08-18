@@ -21,118 +21,156 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* Cover photo */
-        .cover-photo {
+        /* Home hero — full-bleed photo with the tagline, quick links, and socials laid
+           directly over the image, inspired by the reference sites Brandon sent (Thom Henke's
+           on-photo nav/social row; Andy Bakun's minimal, uncluttered feel). The persistent
+           site header (name + full nav) stays solid above it, so this content sits lower,
+           clear of the header, rather than repeating the name again. */
+        .home-hero {
+            position: relative;
             width: 100%;
-            height: auto;
-            max-width: 520px;
-            display: block;
-            border-radius: 24px;
-            border: 6px solid var(--color-maroon);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
-        }
-
-        .hero-grid {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4rem;
+            overflow: hidden;
+        }
+
+        .home-hero-photo {
+            position: absolute;
+            inset: 0;
             width: 100%;
-            max-width: 1200px;
-            padding: 120px 20px 60px 20px;
-            box-sizing: border-box;
-            flex-wrap: wrap;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 28%;
+            display: block;
         }
 
-        .hero-image-wrapper {
-            flex: 0 0 46%;
-            min-width: 280px;
+        .home-hero-scrim {
+            position: absolute;
+            inset: 0;
+            /* Same fixed dark literal as the splash scrim, for the same reason: it darkens
+               whatever photo sits behind it so the white overlay text stays legible,
+               independent of the --color-navy role swap elsewhere in the palette. */
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
-        .hero-copy {
-            flex: 1 1 46%;
-            min-width: 280px;
-            color: var(--color-maroon);
+        .home-hero-content {
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
-            align-items: flex-start;
-            text-align: left;
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 7vw, 6.2rem);
-            line-height: 0.95;
-            margin: 0;
-            letter-spacing: 0.08em;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: var(--color-maroon);
-            word-break: keep-all;
-            overflow-wrap: normal;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2vw, 1.8rem);
-            font-weight: 500;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: rgba(var(--color-maroon-rgb), 0.85);
-            margin: 0;
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 1rem;
-        }
-
-        .hero-btn {
-            display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 170px;
-            padding: 1rem 1.8rem;
-            border-radius: 999px;
-            border: 1px solid var(--color-white);
-            background-color: var(--color-maroon);
-            color: var(--color-white);
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            text-decoration: none;
-            transition: transform 0.35s ease, background-color 0.35s ease, border-color 0.35s ease;
+            text-align: center;
+            gap: 1.4rem;
+            padding: 20px;
         }
 
-        .hero-btn:hover,
-        .hero-btn:focus-visible {
-            background-color: rgba(var(--color-maroon-rgb), 0.92);
-            border-color: var(--color-white);
+        .home-hero-tagline {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+        }
+
+        /* Quick links to the other pages, laid directly over the photo — same idea as the
+           Thom Henke reference's on-photo nav row. The header above already carries the same
+           links, so this is a second, more prominent way in, not a replacement for it. */
+        .home-hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.9rem 1.8rem;
+        }
+
+        .home-hero-links a {
             color: var(--color-white);
-            transform: translateY(-2px);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            padding-bottom: 4px;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .home-hero-links a:hover,
+        .home-hero-links a:focus-visible {
+            border-color: var(--color-white);
             outline: none;
         }
 
-        @media (max-width: 520px) {
-            .hero-grid {
-                gap: 2rem;
-                padding: 120px 16px 30px 16px;
+        /* Anchored to the bottom of the photo, separate from the centered tagline/links
+           block above, matching the Thom Henke reference's layout. */
+        .home-hero-social {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            right: 0;
+            bottom: 48px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        @media (max-width: 640px) {
+
+            .home-hero-content {
+                margin-top: 40vh;
+            }
+            
+            .home-hero-social {
+                bottom: 28px;
             }
 
-            .hero-copy {
-                align-items: center;
-                text-align: center;
+            .home-hero-links {
+                flex-direction: column;
+                gap: 0.7rem;
             }
 
-            .hero-btn {
-                width: 100%;
-            }
+            .home-hero-links a {
 
-            .hero-image-wrapper {
-                margin-left: -10px;
+                font-size: 0.75rem;
+                letter-spacing: 0.14em;
             }
+        }
+
+        /* The site header is transparent by default (tweak-transparent-header) and normally
+           that's invisible because every other page puts a plain-colored block right under
+           it. The home hero is now a full-bleed photo, so the header sits directly on top of
+           it — its maroon nav/logo need to switch to a light variant here, or they disappear
+           against the photo. Scoped to home only via the body class showPage() toggles. */
+        body.home-hero-active #header {
+            --solidHeaderNavigationColor: var(--color-white) !important;
+            --gradientHeaderNavigationColor: var(--color-white) !important;
+        }
+
+        body.home-hero-active .header-title-text a,
+        body.home-hero-active .header-nav-list a,
+        body.home-hero-active .header-nav-wrapper a,
+        body.home-hero-active .header-icon {
+            color: var(--color-white) !important;
+        }
+
+        /* Brandon's hand-drawn logo is dark ink on a transparent PNG, so a plain color
+           override can't relight it — invert it instead, which turns the dark strokes light
+           while leaving the transparent background untouched. */
+        body.home-hero-active #site-title img,
+        body.home-hero-active #site-title-mobile img {
+            filter: invert(1) brightness(1.8);
+        }
+
+        body.home-hero-active .header-burger-inner,
+        body.home-hero-active .header-burger-inner::before,
+        body.home-hero-active .header-burger-inner::after,
+        body.home-hero-active .header-burger.is-active .header-burger-inner::before,
+        body.home-hero-active .header-burger.is-active .header-burger-inner::after {
+            background-color: var(--color-white) !important;
         }
 
         /* Page fade-in animation */
@@ -1576,20 +1614,24 @@
             margin-top: 1.6rem;
         }
 
-        /* White variant of .contact-social-btn for use over the splash's dark scrim */
-        .splash-social .contact-social-btn {
+        /* White variant of .contact-social-btn for use over the splash's and home hero's dark scrims */
+        .splash-social .contact-social-btn,
+        .home-hero-social .contact-social-btn {
             border-color: var(--color-white);
         }
 
-        .splash-social .contact-social-btn svg {
+        .splash-social .contact-social-btn svg,
+        .home-hero-social .contact-social-btn svg {
             fill: var(--color-white);
         }
 
-        .splash-social .contact-social-btn:hover {
+        .splash-social .contact-social-btn:hover,
+        .home-hero-social .contact-social-btn:hover {
             background-color: var(--color-white);
         }
 
-        .splash-social .contact-social-btn:hover svg {
+        .splash-social .contact-social-btn:hover svg,
+        .home-hero-social .contact-social-btn:hover svg {
             fill: var(--color-maroon);
         }
 
@@ -1630,16 +1672,19 @@
                 padding: 0.8rem 1.8rem;
             }
 
-            .splash-social {
+            .splash-social,
+            .home-hero-social {
                 margin-top: 1.2rem;
             }
 
-            .splash-social .contact-social-btn {
+            .splash-social .contact-social-btn,
+            .home-hero-social .contact-social-btn {
                 width: 40px;
                 height: 40px;
             }
 
-            .splash-social .contact-social-btn svg {
+            .splash-social .contact-social-btn svg,
+            .home-hero-social .contact-social-btn svg {
                 width: 34px;
                 height: 34px;
             }
@@ -1844,21 +1889,30 @@
                         <div class="section-background" style="background-color: var(--color-white); opacity: 1;"></div>
                         <div class="section-background-overlay" style="opacity: 0;"></div>
                         <div class="content-wrapper" style="padding: 0; background-color: var(--color-white);">
-                            <div class="content" style="display: flex; justify-content: center; background-color: var(--color-navy);">
-                                <div class="hero-grid">
-                                    <div class="hero-image-wrapper">
-                                        <img src="brandon-commercial-04.jpeg" alt="Brandon Cook" class="cover-photo">
+                            <div class="content" style="padding: 0;">
+                                <div class="home-hero">
+                                    <img src="brandon-commercial-04.jpeg" alt="Brandon Cook" class="home-hero-photo">
+                                    <div class="home-hero-scrim"></div>
+                                    <div class="home-hero-content reveal-stagger">
+                                        <!-- <p class="home-hero-tagline">Film/TV • Stage Actor</p> -->
+                                        <nav class="home-hero-links">
+                                            <a href="#" onclick="showPage('about'); return false;">About</a>
+                                            <a href="#" onclick="showPage('hr'); return false;">Headshot &amp; Résumé</a>
+                                            <a href="#" onclick="showPage('media'); return false;">Media</a>
+                                            <a href="#" onclick="showPage('gallery'); return false;">Gallery</a>
+                                            <a href="#" onclick="showPage('contact'); return false;">Contact</a>
+                                        </nav>
                                     </div>
-                                    <div class="hero-copy reveal-stagger">
-                                        <h1 class="hero-title">Brandon Cook</h1>
-                                        <p class="hero-subtitle">Film/TV • Stage Actor</p>
-                                        <div class="hero-buttons">
-                                            <a href="#" onclick="showPage('about'); return false;" class="hero-btn">About Me</a>
-                                            <a href="#" onclick="showPage('hr'); return false;" class="hero-btn">Headshot &amp; Résumé</a>
-                                            <a href="#" onclick="showPage('media'); return false;" class="hero-btn">Media</a>
-                                            <a href="#" onclick="showPage('gallery'); return false;" class="hero-btn">Gallery</a>
-                                            <a href="#" onclick="showPage('contact'); return false;" class="hero-btn">Contact</a>
-                                        </div>
+                                    <div class="home-hero-social">
+                                        <a href="mailto:brandonaubreycook@gmail.com" class="contact-social-btn" aria-label="Email">
+                                            <svg viewBox="0 0 64 64" style="height:28px; width:28px;"><use xlink:href="#email-icon"></use></svg>
+                                        </a>
+                                        <a href="https://www.instagram.com/brandoncook7/" target="_blank" class="contact-social-btn" aria-label="Instagram">
+                                            <svg viewBox="0 0 64 64"><use xlink:href="#instagram-unauth-icon"></use></svg>
+                                        </a>
+                                        <a href="https://resumes.actorsaccess.com/brandoncook" target="_blank" class="contact-social-btn" aria-label="Actors Access">
+                                            <svg viewBox="0 2 64 64" style="height:48px; width:48px;"><use xlink:href="#actorsaccess-icon"></use></svg>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -2292,6 +2346,11 @@
         function showPage(pageName) {
             // Update tab title
             document.title = pageTitles[pageName] || 'Brandon Cook';
+
+            // The home hero is a full-bleed photo the transparent header sits directly on
+            // top of, so its text/icons/logo need to switch to a light variant there —
+            // everywhere else the header sits on a plain background and stays as designed.
+            document.body.classList.toggle('home-hero-active', pageName === 'home');
 
             // Hide all pages - use more specific selector
             const pages = document.querySelectorAll('main > .page-section');

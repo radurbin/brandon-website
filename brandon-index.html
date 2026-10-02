@@ -603,6 +603,17 @@
             }
         }
 
+        /* An odd number of videos leaves the last one alone on its row — span it across
+           both columns and center it at the same width as a single column (half the grid
+           minus half the 40px gap). */
+        @media (min-width: 769px) {
+            .media-video-grid > .media-row:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
+                width: calc(50% - 20px);
+                justify-self: center;
+            }
+        }
+
         .media-three-videos {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -2026,7 +2037,27 @@
                                      below being temporarily commented out. -->
                                 <div class="media-video-grid">
 
-                                <!-- Row 1: Feems - poison (Music Video) -->
+                                <!-- Row 1: Demo Reel -->
+                                <div class="media-row reveal">
+                                    <div class="video-wrapper">
+                                        <div class="yt-lite" data-src="https://www.youtube.com/embed/Km03rcXMxp4?autoplay=1&rel=0">
+                                            <img src="https://i.ytimg.com/vi/Km03rcXMxp4/maxresdefault.jpg" alt="Brandon Cook - Demo Reel" loading="lazy">
+                                            <button class="yt-play-btn" aria-label="Play video"><svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/><path d="M45 24 27 14v20" fill="#fff"/></svg></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Row 2: Senior Showcase -->
+                                <div class="media-row reveal">
+                                    <div class="video-wrapper">
+                                        <div class="yt-lite" data-src="https://www.youtube.com/embed/uTbrlqv822U?autoplay=1&rel=0">
+                                            <img src="https://i.ytimg.com/vi/uTbrlqv822U/maxresdefault.jpg" alt="Brandon Cook - Senior Showcase" loading="lazy">
+                                            <button class="yt-play-btn" aria-label="Play video"><svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/><path d="M45 24 27 14v20" fill="#fff"/></svg></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Row 3: Feems - poison (Music Video) -->
                                 <div class="media-row reveal">
                                     <div class="video-wrapper">
                                         <div class="yt-lite" data-src="https://www.youtube.com/embed/7hKogK6NsxI?autoplay=1&rel=0">
@@ -2040,57 +2071,6 @@
                                         <p style="margin-bottom: 12px; color: rgba(var(--color-maroon-rgb),0.7);"><em>Winner, NATAS Ohio Valley Student Emmy &mdash; Music Video category</em></p>
                                         TODO: replace this lorem ipsum placeholder with a real press quote/description once available
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </div>
-                                    -->
-                                </div>
-
-                                <!-- Row 2: Demo Reel (moved out of the separate Reels section per request) -->
-                                <div class="media-row reveal">
-                                    <div class="video-wrapper">
-                                        <div class="yt-lite" data-src="https://www.youtube.com/embed/t1fvKyt4Wz0?autoplay=1&rel=0">
-                                            <img src="https://i.ytimg.com/vi/t1fvKyt4Wz0/maxresdefault.jpg" alt="Brandon Cook - Demo Reel" loading="lazy">
-                                            <button class="yt-play-btn" aria-label="Play video"><svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/><path d="M45 24 27 14v20" fill="#fff"/></svg></button>
-                                        </div>
-                                    </div>
-                                    <!-- review-text temporarily hidden — testing videos-only layout, may restore later
-                                    <div class="review-text">
-                                        <h3>Demo Reel</h3>
-                                        TODO: replace this lorem ipsum placeholder with a real press quote/description once available
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                    </div>
-                                    -->
-                                </div>
-
-                                <!-- Row 3: 6 Years - Showcase Scene -->
-                                <div class="media-row reveal">
-                                    <div class="video-wrapper">
-                                        <div class="yt-lite" data-src="https://www.youtube.com/embed/C-ms18lCyXY?autoplay=1&rel=0">
-                                            <img src="https://i.ytimg.com/vi/C-ms18lCyXY/maxresdefault.jpg" alt="6 Years - Showcase Scene" loading="lazy">
-                                            <button class="yt-play-btn" aria-label="Play video"><svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/><path d="M45 24 27 14v20" fill="#fff"/></svg></button>
-                                        </div>
-                                    </div>
-                                    <!-- review-text temporarily hidden — testing videos-only layout, may restore later
-                                    <div class="review-text">
-                                        <h3>6 Years &mdash; Showcase Scene</h3>
-                                        TODO: replace this lorem ipsum placeholder with a real press quote/description once available
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                    </div>
-                                    -->
-                                </div>
-
-                                <!-- Row 4: The Newsroom - Showcase Scene - Solo -->
-                                <div class="media-row reveal">
-                                    <div class="video-wrapper">
-                                        <div class="yt-lite" data-src="https://www.youtube.com/embed/oCez_kJFoDQ?autoplay=1&rel=0">
-                                            <img src="https://i.ytimg.com/vi/oCez_kJFoDQ/maxresdefault.jpg" alt="The Newsroom - Showcase Scene - Solo" loading="lazy">
-                                            <button class="yt-play-btn" aria-label="Play video"><svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/><path d="M45 24 27 14v20" fill="#fff"/></svg></button>
-                                        </div>
-                                    </div>
-                                    <!-- review-text temporarily hidden — testing videos-only layout, may restore later
-                                    <div class="review-text">
-                                        <h3>The Newsroom &mdash; Showcase Scene, Solo</h3>
-                                        TODO: replace this lorem ipsum placeholder with a real press quote/description once available
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
                                     </div>
                                     -->
                                 </div>

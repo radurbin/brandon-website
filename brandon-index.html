@@ -219,21 +219,23 @@
            Everything below reads from these variables instead of hardcoded hex.
            ============================ */
         :root {
-            /* LIGHT-MODE TEST (2026): roles swapped from the original dark theme.
-               --color-navy now literally HOLDS a light green (it used to be the dark bg —
-               name kept as-is to avoid renaming it everywhere) and --color-maroon now
-               HOLDS the old dark navy/teal as the accent. See the many rules throughout
-               this file that used to read fine as "white text on var(--color-navy)" —
-               those were hand-converted to dark text/rgba so this still reads correctly. */
-            --color-navy: #c2dee1;         /* primary LIGHT background (was the dark navy bg; value is the old About-card tint) */
-            --color-navy-rgb: 194, 222, 225; /* same color, as r,g,b for use in rgba() */
-            --color-maroon: #173639;       /* accent — buttons, borders, links, headings (was the dark navy bg color) */
-            --color-maroon-rgb: 23, 54, 57;
-            --color-maroon-hover: #1f484c; /* accent hover/lighter shade */
+            /* CLEAN THEME (Oct 2026, per Brandon: "white/off white backdrop with navy or
+               black lettering and maybe pops of brown"). The variable NAMES are historical
+               and no longer describe their values — kept as-is to avoid renaming them
+               everywhere: --color-navy HOLDS the off-white page background, and
+               --color-maroon HOLDS the navy used for text, buttons, borders and footer.
+               --color-brown is the accent "pop", used for page headings. */
+            --color-navy: #f6f4f0;         /* primary page background — warm off-white */
+            --color-navy-rgb: 246, 244, 240; /* same color, as r,g,b for use in rgba() */
+            --color-maroon: #1b2a41;       /* navy — body text, buttons, borders, links, footer */
+            --color-maroon-rgb: 27, 42, 65;
+            --color-maroon-hover: #2c3f5c; /* navy hover/lighter shade */
+            --color-brown: #8b5a3c;        /* accent pop — page headings (pulled from the warm brown in his headshot) */
+            --color-brown-rgb: 139, 90, 60;
             --color-white: #ffffff;        /* main light text/background color */
-            --color-about-bg: #eef6f2;     /* About page card background — near-white, kept distinct from the new light --color-navy */
-            --color-contact-bg: #eef6f2;   /* Contact page card background — palest tint, lighter than about-bg */
-            --color-commercial-bg: #eef6f2;/* Commercial gallery letterbox background — muted mid-tone between navy and maroon */
+            --color-about-bg: #ffffff;     /* About page card — pure white, so it lifts slightly off the off-white page */
+            --color-contact-bg: #ffffff;   /* Contact page card — same as About */
+            --color-commercial-bg: #ffffff;/* Commercial gallery band and photo letterbox background */
 
             /* ============================
                FONT OPTIONS — testing ground for a new site-wide typeface.
@@ -364,7 +366,7 @@
         }
 
         .gallery-section--commercial .gallery-section-title {
-            color: var(--color-maroon);
+            color: var(--color-brown);
         }
 
         .gallery-section--commercial .gallery-section-empty {
@@ -373,7 +375,7 @@
 
         /* Gallery section title */
         .gallery-section-title {
-            color: var(--color-maroon);
+            color: var(--color-brown);
             font-size: 1.4rem;
             font-weight: 300;
             letter-spacing: 0.12em;
@@ -569,7 +571,7 @@
         }
 
         .media-section-title {
-            color: var(--color-maroon);
+            color: var(--color-brown);
         }
 
         .media-row {
@@ -1359,7 +1361,7 @@
         }
 
         .gallery-title {
-            color: var(--color-maroon);
+            color: var(--color-brown);
             font-size: clamp(1.8rem, 5vw, 2.8rem);
             margin: 0 0 40px 0;
             text-transform: uppercase;
@@ -1953,7 +1955,7 @@
                                         <img src="brandon-about.jpg" alt="Brandon Cook" class="about-image">
                                     </div>
                                     <div class="about-text" style="font-size: 16.3px;">
-                                        <h2 style="font-size: 2.5rem; margin-top: 0; margin-bottom: 1.2rem; color: var(--color-maroon);">About Me</h2>
+                                        <h2 style="font-size: 2.5rem; margin-top: 0; margin-bottom: 1.2rem; color: var(--color-brown);">About Me</h2>
                                         <p class="" style="white-space:pre-wrap;">Born in Atlanta, Georgia. Based in New York.</p>
                                         <p class="" style="white-space:pre-wrap;">At first, Brandon's dream (like his best friend) was to be an engineer at his home-state-school of Georgia Tech. When he realized there were infinite types of engineers, he shifted his focus to something a bit more fitting; basketball.</p>
                                         <p class="" style="white-space:pre-wrap;">Except with his stature (an exceptional 5'10) this dream died sooner than he would've liked. After forgetting his sneakers at home on the day of tryouts, he shifted his focus one last time- theater.</p>
@@ -2182,7 +2184,7 @@
                                 <div class="connect-container">
                                     <div class="connect-content reveal-stagger">
                                         <div class="contact-info-area">
-                                            <h2 style="font-size: 3.5rem; margin-top: 0; margin-bottom: 1.5rem; color: var(--color-maroon);">Let's Work Together!</h2>
+                                            <h2 style="font-size: 3.5rem; margin-top: 0; margin-bottom: 1.5rem; color: var(--color-brown);">Let's Work Together!</h2>
                                             <p style="font-size: 1.1rem; color: var(--color-maroon); margin-bottom: 1.5rem;">Email: <a href="mailto:brandonaubreycook@gmail.com" style="color: var(--color-maroon); text-decoration: underline;">brandonaubreycook@gmail.com</a></p>
                                             <p style="font-size: 1rem; color: var(--color-maroon); margin-bottom: 2rem;">Thank you for checking out my website!</p>
                                             <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">

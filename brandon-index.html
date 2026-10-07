@@ -1596,9 +1596,14 @@
             text-align: center;
             gap: 1.1rem;
             padding: 20px;
+            /* Per Brandon: the name should match the tagline/Enter text below it. Those had no
+               font set and were silently falling back to the browser default (Helvetica on
+               Mac, Arial on Windows), so pin it explicitly here and let the title inherit it. */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         .splash-title {
+            font-family: inherit;
             font-size: clamp(2.4rem, 7vw, 5rem);
             line-height: 0.95;
             margin: 0;
@@ -1625,9 +1630,11 @@
             padding: 0.9rem 2.2rem;
             margin-top: 0.6rem;
             border-radius: 999px;
-            border: 1px solid var(--color-white);
-            background-color: var(--color-maroon);
+            /* Outlined white, matching the social icon circles below it */
+            border: 2px solid var(--color-white);
+            background-color: transparent;
             color: var(--color-white);
+            font-family: inherit;
             font-size: 0.9rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -1638,9 +1645,9 @@
 
         .splash-enter-btn:hover,
         .splash-enter-btn:focus-visible {
-            background-color: rgba(var(--color-maroon-rgb), 0.92);
+            background-color: var(--color-white);
             border-color: var(--color-white);
-            color: var(--color-white);
+            color: var(--color-maroon);
             transform: translateY(-2px);
             outline: none;
         }

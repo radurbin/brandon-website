@@ -1225,7 +1225,11 @@
             .content,
             section {
                 max-width: 100vw !important;
-                overflow-x: hidden !important;
+                /* clip, NOT hidden: overflow-x:hidden silently forces overflow-y to auto,
+                   which turned these sections into their own little scroll areas on
+                   phones (the Gallery section swallowed swipes before the page scrolled).
+                   clip trims sideways overflow without ever creating a scroll container. */
+                overflow-x: clip !important;
             }
 
             /* Hide entire desktop header */
@@ -1287,9 +1291,11 @@
                 max-width: fit-content !important;
             }
 
-            /* Gallery page - add more space at top */
+            /* Gallery page - add more space at top. The mobile header floats over the page
+               and its logo ends ~102px down, so 100px left the white Commercial band touching
+               the logo — 130px gives it clear breathing room. */
             #gallery-page .page-section {
-                padding-top: 100px !important;
+                padding-top: 130px !important;
             }
 
             /* Contact page - add more space at top */

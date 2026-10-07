@@ -455,8 +455,25 @@
             }
         }
 
-        .gallery-page-item:hover img {
+        /* Caption reveal: hover on desktop, tap on touch screens. Hover is limited to
+           devices that really hover — phones fake a "sticky" hover on tap, which would fight
+           the tap toggle (the .is-tapped class set by the script at the bottom of the page). */
+        @media (hover: hover) {
+            .gallery-page-item:hover img {
+                filter: blur(4px) brightness(0.6);
+            }
+
+            .gallery-item:hover .gallery-overlay {
+                opacity: 1;
+            }
+        }
+
+        .gallery-page-item.is-tapped img {
             filter: blur(4px) brightness(0.6);
+        }
+
+        .gallery-item.is-tapped .gallery-overlay {
+            opacity: 1;
         }
 
         .gallery-overlay {
@@ -469,10 +486,6 @@
             transition: opacity 0.3s ease;
             padding: 15px;
             text-align: center;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
         }
 
         .gallery-overlay p {
@@ -2443,6 +2456,21 @@
             // mobile menu's active states)
             showPage(pageName);
         }
+    </script>
+
+    <!-- Production gallery: tap a photo to show/hide its caption on touch screens
+         (desktop uses hover instead — see the @media (hover: hover) CSS) -->
+    <script>
+        document.querySelectorAll('.gallery-page-item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                if (!window.matchMedia('(hover: none)').matches) return;
+                var wasOpen = item.classList.contains('is-tapped');
+                document.querySelectorAll('.gallery-page-item.is-tapped').forEach(function(other) {
+                    other.classList.remove('is-tapped');
+                });
+                if (!wasOpen) item.classList.add('is-tapped');
+            });
+        });
     </script>
 
     <script>

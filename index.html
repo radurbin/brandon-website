@@ -1473,6 +1473,10 @@
             width: 400px;
             aspect-ratio: 3/4;
             object-fit: cover;
+            /* Per-photo crop: set style="--pos: <x> <y>;" on an <img> to move it (default
+               centered), and optionally "--pos-mobile: <x> <y>;" for phones only — see the
+               max-width: 768px block below. */
+            object-position: var(--pos, center);
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         }
@@ -1500,6 +1504,8 @@
 
             .scroller-img {
                 height: 280px;
+                /* Phone crop: uses --pos-mobile if the photo sets one, otherwise the same --pos as desktop */
+                object-position: var(--pos-mobile, var(--pos, center));
             }
 
             .gallery-scroll {
@@ -2015,23 +2021,32 @@
                     </section>
 
                     <!-- GALLERY SECTION -->
-                    <!-- No personal "offstage" photos were provided in Brandon's saved site; placeholder tiles below pending real photos -->
+                    <!-- Offstage photos from Brandon (Oct 2026). 02 is a GIF converted from his video. -->
                     <section data-test="page-section" class="page-section" style="padding: 0;">
                         <div class="gallery-container reveal-stagger">
                             <h2 class="gallery-title">Offstage</h2>
                             <div class="gallery-wrapper">
                                 <div class="gallery-scroll">
                                     <figure class="scroller-item">
-                                        <img src="placeholder.png" alt="Gallery Image Coming Soon" class="scroller-img">
+                                        <img src="brandon-offstage-01.jpg" alt="Brandon at Stonehenge" class="scroller-img" loading="lazy" style="--pos-mobile: 40% 30%;">
                                     </figure>
                                     <figure class="scroller-item">
-                                        <img src="placeholder.png" alt="Gallery Image Coming Soon" class="scroller-img">
+                                        <img src="brandon-offstage-02.gif" alt="Brandon dancing at Stonehenge" class="scroller-img" loading="lazy" style="--pos: center 25%; --pos-mobile: center 20%;">
                                     </figure>
                                     <figure class="scroller-item">
-                                        <img src="placeholder.png" alt="Gallery Image Coming Soon" class="scroller-img">
+                                        <img src="brandon-offstage-03.jpg" alt="Brandon with friends at his half marathon" class="scroller-img" loading="lazy">
                                     </figure>
                                     <figure class="scroller-item">
-                                        <img src="placeholder.png" alt="Gallery Image Coming Soon" class="scroller-img">
+                                        <img src="brandon-offstage-04.jpg" alt="Brandon with his sister" class="scroller-img" loading="lazy" style="--pos-mobile: center 35%;">
+                                    </figure>
+                                    <figure class="scroller-item">
+                                        <img src="brandon-offstage-05.jpg" alt="Brandon smiling with his mom" class="scroller-img" loading="lazy" style="--pos: center 20%;">
+                                    </figure>
+                                    <figure class="scroller-item">
+                                        <img src="brandon-offstage-06.jpg" alt="Brandon posing at night" class="scroller-img" loading="lazy" style="--pos: 60% center;">
+                                    </figure>
+                                    <figure class="scroller-item">
+                                        <img src="brandon-offstage-07.jpg" alt="Brandon with friends at dinner" class="scroller-img" loading="lazy" style="--pos: 35% center;">
                                     </figure>
                                 </div>
                             </div>
@@ -2456,6 +2471,79 @@
             // mobile menu's active states)
             showPage(pageName);
         }
+    </script>
+
+    <!-- Offstage strip (About page): slow, steady, endless drift. The photos are duplicated
+         once (copies hidden from screen readers) so that when the strip has drifted through
+         one full set it can jump back by exactly that width — invisible, since the copy looks
+         identical. Pauses while the visitor hovers, swipes, or scrolls it, and stays still for
+         anyone with "reduce motion" turned on. -->
+    <script>
+        (function() {
+            var strip = document.querySelector('.gallery-scroll');
+            if (!strip || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            var SPEED = 30;            // pixels per second
+            var RESUME_AFTER = 50;   // ms of no interaction before the drift resumes
+
+            // Duplicate the set so the loop is seamless
+            var originals = Array.prototype.slice.call(strip.children);
+            var firstCopy = null;
+            originals.forEach(function(fig) {
+                var copy = fig.cloneNode(true);
+                copy.setAttribute('aria-hidden', 'true');
+                copy.querySelectorAll('img').forEach(function(img) { img.alt = ''; });
+                strip.appendChild(copy);
+                if (!firstCopy) firstCopy = copy;
+            });
+
+            // CSS smooth-scrolling would fight the per-frame updates below
+            strip.style.scrollBehavior = 'auto';
+
+            var pos = strip.scrollLeft;
+            var last = null;
+            var pausedUntil = 0;
+            var hovering = false;
+
+            function pause() { pausedUntil = Date.now() + RESUME_AFTER; }
+
+            // Hover-to-hold is for real mice only. Phones fire a fake "mouse enter" on touch
+            // but often no matching "leave", which used to leave the strip stuck paused.
+            strip.addEventListener('pointerenter', function(e) { if (e.pointerType === 'mouse') hovering = true; });
+            strip.addEventListener('pointerleave', function(e) { if (e.pointerType === 'mouse') { hovering = false; pause(); } });
+            // Touch/drag/scroll: hold still, then resume RESUME_AFTER ms after the last touch
+            // (touchmove/touchend restart the countdown so it doesn't resume mid-swipe)
+            ['touchstart', 'touchmove', 'touchend', 'pointerdown', 'wheel'].forEach(function(evt) {
+                strip.addEventListener(evt, pause, { passive: true });
+            });
+
+            function frame(now) {
+                var dt = last === null ? 0 : (now - last) / 1000;
+                last = now;
+
+                // Exact length of one full set (photos + gaps): distance from the first
+                // photo to its copy. Measured each frame so it stays right if the window
+                // is resized or images finish loading.
+                var setWidth = firstCopy.offsetLeft - originals[0].offsetLeft;
+
+                // If the visitor moved the strip, pick up from wherever they left it
+                if (Math.abs(strip.scrollLeft - pos) > 2) pos = strip.scrollLeft;
+
+                var running = !hovering && Date.now() >= pausedUntil && strip.offsetParent && !document.hidden;
+                if (running && setWidth > 0) {
+                    pos += SPEED * Math.min(dt, 0.1); // cap dt so returning to the tab doesn't lurch
+                    if (pos >= setWidth) pos -= setWidth;
+                    strip.scrollLeft = pos;
+                } else if (setWidth > 0 && strip.scrollLeft >= setWidth) {
+                    // Keep manual swiping endless too
+                    pos = strip.scrollLeft - setWidth;
+                    strip.scrollLeft = pos;
+                }
+
+                requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+        })();
     </script>
 
     <!-- Production gallery: tap a photo to show/hide its caption on touch screens
